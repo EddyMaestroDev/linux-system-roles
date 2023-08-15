@@ -1,4 +1,4 @@
-# Ansible Collection - EddyMaestroDev.linux_system_roles
+# Ansible Collection - Linux System Roles
 
 This is unified Ansible collection to centrally manage many Linux system settings, for open(SUSE), Red Hat/ CentOS and Debian based Distris on Bare-Metal, Vmware vSphere, IBM PowerVM or Cloud Managed Installation.
 
