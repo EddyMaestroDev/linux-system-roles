@@ -1,2 +1,21 @@
----
 # tasks file for subscription
+---
+- include_vars: main.yml
+
+- import_taks: pre_check.yml
+
+- name: "Active Subscripe '{{ item }}'"
+  include_tasks: "{{ item }}"
+  with_first_found:
+    - "subscripe_{{ ansible_distribution_file_variety }}-{{ ansible_distribution_major_version }}.yml"
+    - "subscripe_{{ ansible_distribution_file_variety }}.yml"
+  when:
+  - subscripte_system == true
+
+- name: "Inactive Subscription '{{ item }}'"
+  include_tasks: "{{ item }}"
+  with_first_found:
+    - "unsubscripe_{{ ansible_distribution_file_variety }}-{{ ansible_distribution_major_version }}.yml"
+    - "unsubscripe_{{ ansible_distribution_file_variety }}.yml"
+  when:
+  - subscripte_system == false

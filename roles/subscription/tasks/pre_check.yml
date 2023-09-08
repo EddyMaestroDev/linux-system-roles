@@ -1,0 +1,23 @@
+---
+# Pre-Checks
+
+- name: Check Linux Distribution
+  block:
+    - name: Subscription is only needed for RHEL/SLES Systems
+      ansible.builtin.meta: end_host
+    - name: Message
+      ansible.builtin.debug:
+        msg: "It's a NON Enterprise Distribution"
+  when:
+  - ansible_distribution != 'SLES'
+  - ansible_distribution != 'RedHat'
+
+- name: Check EUID
+  command: /usr/bin/id -u
+  register: euid_state
+  changed_when: false
+
+- name: fails if not Root
+  fail:
+    msg: "This Role needs to be executed as root"
+  when: euid_state.stdout is defined and euid_state.stdout | int != 0

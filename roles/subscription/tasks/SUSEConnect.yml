@@ -1,0 +1,16 @@
+---
+- name: Check if connected to SUSE Manager
+  ansible.builtin.stat:
+    path: /etc/sysconfig/rhn
+  register: suma_connected
+  changed_when: suma_connected.stat.exists == true
+
+- name: Check if already connected to SCC
+  ansible.builtin.stat:
+    path: /etc/zypp/credentials.d/SCCcredentials
+  register: scc_connected
+  changed_when: scc_connected.stat.exists == true
+
+- ansible.builtin.debug: var=suma_connected
+
+- ansible.builtin.debug: var=scc_connected

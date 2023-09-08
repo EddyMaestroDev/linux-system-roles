@@ -1,0 +1,13 @@
+---
+# Register SLES System
+
+- name: Precheck System State
+  import_tasks: SUSEConnect.yml
+
+- name: Register System to SCC
+  command: "SUSEConnect -r {{sles_subscription_key_id}} -e {{sles_subscription_key_email_address}}"
+  when: suma_connected.stat.exists == false and scc_connected.stat.exists == false
+
+- name: State if nothing is to do
+  ansible.builtin.debug: msg="SUSE System is already Connected to SCC or SUSE Manager"
+  when: suma_connected.stat.exists == true and scc_connected.stat.exists == true

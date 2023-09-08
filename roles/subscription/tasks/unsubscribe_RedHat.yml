@@ -1,0 +1,6 @@
+---
+# RHEL Systems
+
+- name: Unregister Red Hat Subscription
+  redhat_subscription:
+    state: absent

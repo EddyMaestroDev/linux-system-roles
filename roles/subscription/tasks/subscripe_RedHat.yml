@@ -1,0 +1,8 @@
+---
+- name: Red Hat Register as user with password and a specific release
+  redhat_subscription:
+    state: present
+    username: "{{ rhn_user_id }}"
+    password: "{{ rhn_user_password }}"
+    release: "{{ ansible_distribution_version }}"
+    pool_ids: "{{ rhel_pool_ids }}"

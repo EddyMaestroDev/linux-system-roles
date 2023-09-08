@@ -1,0 +1,24 @@
+---
+# SUSE Deregistration
+
+- name: Precheck System State
+  import_tasks: SUSEConnect.yml
+
+- name: Deregister SLES System
+  block:
+    - name: Deregister System
+      command: "SUSEConnect --de-register"
+
+    - name: Remove old credentials and Services, installed by SUSEConnect
+      command: "SUSEConnect --cleanup"
+
+    - name: Remove not necessary SUSEConnect files
+      file:
+        path: "{ item }}"
+        state: absent
+      with_items:
+        - /etc/SUSEConnect
+        - /etc/zypp/credentials.d/*
+        - /etc/zypp/repos.d/*
+        - /etc/zypp/services.d/*
+  when: suma_connected.stat.exists == false and scc_connected.stat.exists == true

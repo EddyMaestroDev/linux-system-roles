@@ -1,2 +1,8 @@
 ---
 # defaults file for subscription
+
+subscripte_system: true
+
+# SUSE Vars
+suseconnect_products: []
+suseconnect_status: {}
