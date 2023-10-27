@@ -28,7 +28,7 @@ Basic installed Linux System with Ansible Package, existing ansible User and exc
 Installation
 ------------
 
-ansible-galaxy install EddyH85.linux_system_mgmt
+ansible-galaxy install EddyMaestroDev.linux-system-roles
 
 Role Variables
 --------------
